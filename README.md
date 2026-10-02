@@ -10,11 +10,16 @@ Material docente de la asignatura **Sistemas Informáticos Industriales** de la 
 
 ---
 
+
 ## 📖 Descripción
 
-Este repositorio contiene el material utilizado en las prácticas de la asignatura **Sistemas Informáticos Industriales**, incluyendo los guiones y el código de inicio.
+Práctica 1: Entorno de desarrollo bajo Linux
 
-El objetivo de la asignatura es introducir en el desarrollo de aplicaciones para sistemas informáticos industriales, haciendo especial énfasis en el uso del lenguaje C y del sistema operativo Linux.
+Asignatura: Sistemas Informáticos Industriales
+Autor: Pablo Muñoz Moreno
+
+Este repositorio contiene el código de un juego de tenis interactivo en modo local para dos jugadores, desarrollado en C++ haciendo uso de las bibliotecas gráficas OpenGL y GLUT. El proyecto está enfocado en la asimilación del sistema operativo Linux, la compilación de binarios con CMake/Make y la gestión del control de versiones.
+
 
 ---
 
