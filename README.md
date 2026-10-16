@@ -13,13 +13,45 @@ Material docente de la asignatura **Sistemas Informáticos Industriales** de la 
 
 ## 📖 Descripción
 
-Práctica 1: Entorno de desarrollo bajo Linux
+# Sistemas Informáticos Industriales
 
-Asignatura: Sistemas Informáticos Industriales
-Autor: Pablo Muñoz Moreno
+**Asignatura:** Sistemas Informáticos Industriales
+**Autor:** Pablo Muñoz Moreno
 
-Este repositorio contiene el código de un juego de tenis interactivo en modo local para dos jugadores, desarrollado en C++ haciendo uso de las bibliotecas gráficas OpenGL y GLUT. El proyecto está enfocado en la asimilación del sistema operativo Linux, la compilación de binarios con CMake/Make y la gestión del control de versiones.
+## Descripción
 
+Este repositorio contiene el código de un juego de tenis interactivo en modo local para dos jugadores, desarrollado en C++ con las bibliotecas gráficas OpenGL y GLUT. El proyecto se desarrolla de forma incremental a lo largo de las prácticas de la asignatura, trabajando con el sistema operativo Linux, la compilación con CMake/Make, el control de versiones con Git y la comunicación entre procesos.
+
+## Práctica 1: Entorno de desarrollo bajo Linux
+
+- Familiarización con Linux y sus comandos básicos.
+- Uso de Git (control de versiones), CMake (configuración de la compilación) y Make (compilación).
+- Movimiento de las raquetas y de la esfera, haciendo el juego interactivo.
+- Controles: raqueta izquierda con `w` / `s`, raqueta derecha con `o` / `l`.
+
+## Práctica 2: Comunicación mediante tuberías con nombre (FIFO)
+
+- Nuevo programa **logger**, que crea la tubería con nombre (`mkfifo`), la abre en modo lectura y muestra por pantalla los datos recibidos. Al terminar, la cierra y la destruye (`close` y `unlink`).
+- El juego **tenis** abre la tubería en modo escritura (en `Init()` de `Mundo`) y envía al logger el jugador y su puntuación total cada vez que se marca un punto (en `OnTimer()`). La tubería se cierra en el destructor de `Mundo`.
+- Tanto `tenis` como `logger` terminan cuando un jugador alcanza 3 puntos.
+- Se ha añadido el ejecutable `logger` en el `CMakeLists.txt`.
+
+### Compilación y ejecución
+
+    mkdir build && cd build
+    cmake ..
+    make
+
+Primero se debe ejecutar el logger y, en otra terminal, el juego:
+
+    ./logger
+    ./tenis
+
+### Ejemplo de salida del logger
+
+    Jugador 1 marca 1 punto, lleva un total de 1 puntos.
+    Jugador 2 marca 1 punto, lleva un total de 1 puntos.
+    Jugador 2 marca 1 punto, lleva un total de 2 puntos.
 
 ---
 
