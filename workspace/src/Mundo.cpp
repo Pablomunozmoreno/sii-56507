@@ -1,7 +1,6 @@
 // Mundo.cpp: implementation of the CMundo class.
 //
-//////////////////////////////////////////////////////////////////////
-#include <fstream>
+//////////////////////////////////////////////////////////////////////#include <fstream>
 #include "Mundo.h"
 #include "glut.h"
 
@@ -10,6 +9,12 @@
 #include <string.h>
 #include <math.h>
 
+//Librerias FIFO
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <unistd.h>
+
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
@@ -17,11 +22,11 @@
 CMundo::CMundo()
 {
 	Init();
-}
+    }
 
 CMundo::~CMundo()
 {
-
+close(fd);
 }
 
 void CMundo::InitGL()
@@ -128,24 +133,32 @@ void CMundo::OnTimer(int value)
 
 	jugador1.Rebota(esfera);
 	jugador2.Rebota(esfera);
-	if(fondo_izq.Rebota(esfera))
-	{
-		esfera.centro.x=0;
-		esfera.centro.y=rand()/(float)RAND_MAX;
-		esfera.velocidad.x=2+2*rand()/(float)RAND_MAX;
-		esfera.velocidad.y=2+2*rand()/(float)RAND_MAX;
-		puntos2++;
-	}
 
-	if(fondo_dcho.Rebota(esfera))
-	{
-		esfera.centro.x=0;
-		esfera.centro.y=rand()/(float)RAND_MAX;
-		esfera.velocidad.x=-2-2*rand()/(float)RAND_MAX;
-		esfera.velocidad.y=-2-2*rand()/(float)RAND_MAX;
-		puntos1++;
-	}
+if(fondo_izq.Rebota(esfera))
+{
+        esfera.centro.x=0;
+        esfera.centro.y=rand()/(float)RAND_MAX;
+        esfera.velocidad.x=2+2*rand()/(float)RAND_MAX;
+        esfera.velocidad.y=2+2*rand()/(float)RAND_MAX;
+        puntos2++;
 
+        char mensaje[100];
+        sprintf(mensaje, "Jugador 2 marca 1 punto, lleva un total de %d puntos.", puntos2);
+        write(fd, mensaje, strlen(mensaje) + 1);
+}
+
+if(fondo_dcho.Rebota(esfera))
+{
+        esfera.centro.x=0;
+        esfera.centro.y=rand()/(float)RAND_MAX;
+        esfera.velocidad.x=-2-2*rand()/(float)RAND_MAX;
+        esfera.velocidad.y=-2-2*rand()/(float)RAND_MAX;
+        puntos1++;
+
+        char mensaje[100];
+        sprintf(mensaje, "Jugador 1 marca 1 punto, lleva un total de %d puntos.", puntos1);
+        write(fd, mensaje, strlen(mensaje) + 1);
+}
 }
 
 void CMundo::OnKeyboardDown(unsigned char key, int x, int y)
@@ -194,4 +207,11 @@ void CMundo::Init()
 	jugador2.x2=6;jugador2.y2=1;
         esfera.velocidad.x=3.0f;
         esfera.velocidad.y=3.0f;
+// Abrir la tubería en modo escritura
+    fd = open("tuberia", O_WRONLY);
+    if (fd < 0) {
+        perror("No se pudo abrir la tuberia para escritura");
+
+
+}
 }
