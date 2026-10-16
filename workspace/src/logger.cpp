@@ -34,5 +34,6 @@ int main(int argc, char **argv) {
     
     close(fd);
     unlink("tuberia");
+printf("La partida ha terminado.\n");
     return(0);
 }

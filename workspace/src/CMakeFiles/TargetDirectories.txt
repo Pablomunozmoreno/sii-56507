@@ -1,0 +1,4 @@
+/home/pablo/practica1/sii-56507/workspace/src/CMakeFiles/tenis.dir
+/home/pablo/practica1/sii-56507/workspace/src/CMakeFiles/logger.dir
+/home/pablo/practica1/sii-56507/workspace/src/CMakeFiles/edit_cache.dir
+/home/pablo/practica1/sii-56507/workspace/src/CMakeFiles/rebuild_cache.dir
